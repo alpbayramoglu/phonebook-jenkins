@@ -139,16 +139,3 @@ pipeline {
     }
 
 }
-
-
-
-/* 
-stages:
-- Create ECR Repo
-- Build App Docker Image
-- Push Image to ECR Repo
-- Create Infrastructure for the App
-- Test the Infrastructure
-- Deploy App on Docker Swarm
-- Destroy the infrastructure
-* post  */
