@@ -1,5 +1,5 @@
 pipeline {
-    agent 
+    agent any
     tools {
         terraform 'terraform'
 }
@@ -10,7 +10,7 @@ pipeline {
         ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
         APP_REPO_NAME = "project/phonebook-app"
         APP_NAME = "phonebook"
-        CFN_KEYPAIR= "firstkey"
+        CFN_KEYPAIR="firstkey"
         HOME_FOLDER = "/home/ec2-user"
         GIT_FOLDER = sh(script:'echo ${GIT_URL} | sed "s/.*\\///;s/.git$//"', returnStdout:true).trim()
     }
@@ -139,16 +139,3 @@ pipeline {
     }
 
 }
-
-
-
-/* 
-stages:
-- Create ECR Repo
-- Build App Docker Image
-- Push Image to ECR Repo
-- Create Infrastructure for the App
-- Test the Infrastructure
-- Deploy App on Docker Swarm
-- Destroy the infrastructure
-* post  */
