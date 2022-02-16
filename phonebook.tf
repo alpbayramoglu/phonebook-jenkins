@@ -1,5 +1,4 @@
-//This terraform file deploys Phonebook Application to five Docker Machines on EC2 Instances  which are ready for Docker Swarm operations. Docker Machines will run on Amazon Linux 2  with custom security group allowing SSH (22), HTTP (80) UDP (4789, 7946),  and TCP(2377, 7946, 8080) connections from anywhere.
-//User needs to select appropriate key name when launching the template.
+
 terraform {
   required_providers {
     aws = {
@@ -13,7 +12,7 @@ provider "aws" {
   region = "us-east-1"
   //  access_key = ""
   //  secret_key = ""
-  //  If you have entered your credentials in AWS CLI before, you do not need to use these arguments.
+
 }
 
 data "aws_caller_identity" "current" {}
@@ -42,7 +41,6 @@ data "template_file" "leader-master" {
       --constraint=node.role==manager \
       --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
       dockersamples/visualizer
-    # uninstall aws cli version 1
     rm -rf /bin/aws
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     unzip awscliv2.zip
@@ -69,7 +67,6 @@ data "template_file" "manager" {
     amazon-linux-extras install epel -y
     yum install python-pip -y
     pip install ec2instanceconnectcli
-    # uninstall aws cli version 1
     rm -rf /bin/aws
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     unzip awscliv2.zip
@@ -99,7 +96,6 @@ data "template_file" "worker" {
     amazon-linux-extras install epel -y
     yum install python-pip -y
     pip install ec2instanceconnectcli
-    # uninstall aws cli version 1
     rm -rf /bin/aws
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     unzip awscliv2.zip
